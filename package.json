@@ -25,11 +25,12 @@
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "react-scripts start",
     "build": "react-scripts build",
     "serve": "serve -s build -l 3000",
+    "start": "BROWSER=none react-scripts start",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test:coverage": "npm test -- --coverage .",
+    "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache"
   },
   "eslintConfig": {
     "extends": [
