@@ -6,7 +6,7 @@ module.exports = {
     "react-app",
     "react-app/jest",
   ],
-  plugins: ["no-null", "prefer-arrow"],
+  plugins: ["escape", "no-null", "prefer-arrow"],
   rules: {
     "@typescript-eslint/no-redeclare": "error",
     "@typescript-eslint/no-unused-vars": [
@@ -25,6 +25,7 @@ module.exports = {
     "default-case": "error",
     "default-case-last": "error",
     eqeqeq: ["error", "always"],
+    "escape/escape": ["error", "non-printable", { exact: true }],
     "grouped-accessor-pairs": ["error", "getBeforeSet"],
     "guard-for-in": "error",
     "import/named": "error",
