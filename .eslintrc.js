@@ -160,7 +160,11 @@ module.exports = {
     radix: "error",
     "require-atomic-updates": "error",
     "require-unicode-regexp": "error",
+    "sonarjs/no-identical-conditions": "off", // see "no-dupe-else-if"
     "sonarjs/no-inverted-boolean-check": "error",
+    "sonarjs/no-one-iteration-loop": "off", // see "no-unreachable-loop"
+    "sonarjs/no-useless-catch": "off", // see "no-useless-catch"
+    "sonarjs/prefer-single-boolean-return": "off", // see "no-else-return"
     "sort-keys": ["error", "asc", { caseSensitive: false, natural: true }],
     "spaced-comment": [
       "error",
