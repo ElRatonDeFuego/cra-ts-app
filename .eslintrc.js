@@ -38,7 +38,7 @@ module.exports = {
       "error",
       { allow: ["**/*.css", "**/*.scss"] },
     ],
-    "import/no-unused-modules": ["error", { unusedExports: true }],
+    "import/no-unused-modules": ["warn", { unusedExports: true }],
     "import/order": [
       "error",
       {
