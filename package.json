@@ -34,6 +34,7 @@
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
     "pre-commit": "npm run lint && lint-staged && npm run test:only-changed && tsc",
+    "pre-push": "npm run pre-commit && npm run test:coverage",
     "serve": "serve -s build -l 3000",
     "start": "BROWSER=none react-scripts start",
     "test": "react-scripts test --watchAll=false",
