@@ -33,11 +33,14 @@
     "build": "react-scripts build",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
+    "pre-commit": "npm run lint && lint-staged && npm run test:only-changed && tsc",
     "serve": "serve -s build -l 3000",
     "start": "BROWSER=none react-scripts start",
-    "test": "react-scripts test",
-    "test:coverage": "npm test -- --coverage .",
-    "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache"
+    "test": "react-scripts test --watchAll=false",
+    "test:coverage": "npm t -- --coverage .",
+    "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
+    "test:only-changed": "npm t -- --onlyChanged",
+    "test:watch": "npm t -- --watchAll=true"
   },
   "browserslist": {
     "production": [
@@ -51,9 +54,6 @@
       "last 1 safari version"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && lint-staged"
     }
   },
   "lint-staged": {
