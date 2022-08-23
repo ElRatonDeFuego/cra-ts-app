@@ -54,6 +54,17 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "./src/{components,hooks}/**/*.{ts,tsx}"
+    ],
+    "coverageThreshold": {
+      "src/{components,hooks}/**/*.{ts,tsx}": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
     }
   },
   "lint-staged": {
