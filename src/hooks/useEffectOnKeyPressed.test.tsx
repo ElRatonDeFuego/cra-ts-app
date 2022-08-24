@@ -43,7 +43,7 @@ it("should call the effect callback when the 'Enter' key is pressed", async () =
   });
 });
 
-it("should call the effect callback when either 'OSLeft' or 'MetaLeft' is pressed", async () => {
+it("should call the effect callback when either 'OS' (Firefox) or 'Meta' (Chromium) is pressed", async () => {
   const effect = jest.fn();
 
   renderHook(() => useEffectOnKeyPressed({ effect, keys: ["OS", "Meta"] }));

@@ -19,7 +19,7 @@ type Props = {
 export const useEffectOnKeyPressed = ({
   effect,
   key,
-  keys = [], // could be ["OS", "Meta"] to accomodate Firefox and Chrome
+  keys = [], // could be e.g. ["OS", "Meta"] to accomodate Firefox and Chrome
   shouldCallEffect = () => true,
 }: Props) => {
   useEffect(() => {
