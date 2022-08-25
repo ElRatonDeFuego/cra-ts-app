@@ -5,7 +5,7 @@ it("should debounce the provided value", async () => {
   const initialText = "initial search";
   const newText = "new text to search for";
 
-  const { result, rerender } = renderHook((value) => useDebounce(value), {
+  const { result, rerender } = renderHook(useDebounce, {
     initialProps: initialText,
   });
 
