@@ -7,7 +7,7 @@ module.exports = {
     "react-app",
     "react-app/jest",
   ],
-  plugins: ["escape", "no-null", "prefer-arrow", "sonarjs"],
+  plugins: ["escape", "no-null", "prefer-arrow", "react-hooks", "sonarjs"],
   rules: {
     "@typescript-eslint/no-redeclare": "error",
     "@typescript-eslint/no-unused-vars": [
