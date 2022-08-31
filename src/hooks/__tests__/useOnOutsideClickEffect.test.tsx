@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { useOnOutsideClickEffect } from "./useOnOutsideClickEffect";
+import { useOnOutsideClickEffect } from "../useOnOutsideClickEffect";
 
 const mockEffect = jest.fn();
 let mockOutsideOfElement: Element | null;

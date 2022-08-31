@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match the snapshot 1`] = `
+<div
+  className="text-center"
+>
+  <header
+    className="bg-gray-900 min-h-screen flex flex-col items-center justify-center text-white text-3xl"
+  >
+    <img
+      alt="logo"
+      className="h-96 pointer-events-none app-logo"
+      src="logo.svg"
+    />
+    <p>
+      Edit 
+      <code>
+        src/App.tsx
+      </code>
+       and save to reload.
+    </p>
+    <a
+      className="text-blue-400"
+      href="https://reactjs.org"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Learn React
+    </a>
+  </header>
+</div>
+`;

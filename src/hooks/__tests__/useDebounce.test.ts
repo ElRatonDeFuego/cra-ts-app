@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from "@testing-library/react";
-import { useDebounce } from "./useDebounce";
+import { useDebounce } from "../useDebounce";
 
 it("should debounce the provided value", async () => {
   const initialText = "initial search";

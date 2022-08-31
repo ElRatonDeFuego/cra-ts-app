@@ -1,5 +1,5 @@
 import { act, render } from "@testing-library/react";
-import { useEffectOnMountOrUnmount } from "./useEffectOnMountOrUnmount";
+import { useEffectOnMountOrUnmount } from "../useEffectOnMountOrUnmount";
 
 jest.mock("react", () => {
   /* eslint-disable */

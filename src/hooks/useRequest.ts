@@ -1,65 +1,106 @@
-import { AxiosError, AxiosRequestConfig, CanceledError } from "axios";
+import { AxiosError, CanceledError } from "axios";
 import useAxios from "axios-hooks";
 import { useEffectOnMountOrUnmount } from "hooks/useEffectOnMountOrUnmount";
 import { ValidationError } from "joi";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
-import type { Options, RefetchOptions } from "axios-hooks";
-import type * as joi from "joi";
+import type { ManualRequestParams, UseRequestParams } from "./useRequestTypes";
+
+export type { ManualRequestParams, UseRequestParams };
 
 // in a const to prevent re-renders due to new object refs
-const defaultHeaders = {
+const DefaultHeaders = {
   "Content-Type": "application/json",
 };
 
-export const useRequest = <T>({
-  abortOnUnmount = true,
-  headers = defaultHeaders,
-  responseSchema,
-  timeout = 2 * 60 * 1000, // default to 2mn
-  throwOnError = false,
-  useAxiosInstance,
-  useCache = false,
-  ...axiosConfigAndOptions
-}: AxiosRequestConfig<T> &
-  Omit<Options, "manual"> & {
-    abortOnUnmount?: boolean;
-    responseSchema?: joi.Schema;
-    throwOnError?: boolean;
-    useAxiosInstance?: typeof useAxios;
-  } = {}) => {
+const DefaultTimeout = 2 * 60 * 1000; // default to 2mn
+
+export const MissingUrlParamError = () => new Error("'url' is required");
+
+export const useRequest = <
+  ResponseDataType = unknown,
+  PayloadBodyType = unknown
+>(
+  {
+    abortOnUnmount = true,
+    headers = DefaultHeaders,
+    manual = true,
+    responseSchema,
+    throwOnCanceled = false,
+    throwOnError = false,
+    timeout = DefaultTimeout,
+    url,
+    useAxiosInstance,
+    useCache = false,
+    ...axiosConfigAndOptions
+  }: UseRequestParams<ResponseDataType, PayloadBodyType> = {
+    abortOnUnmount: true,
+    headers: DefaultHeaders,
+    manual: true,
+    throwOnCanceled: false,
+    throwOnError: false,
+    timeout: DefaultTimeout,
+    url: "",
+    useCache: false,
+  }
+  // eslint-disable-next-line sonarjs/cognitive-complexity
+) => {
   const [requestError, setRequestError] = useState<
-    CanceledError<T> | ValidationError
+    CanceledError<ResponseDataType> | ValidationError | Error
   >();
+
+  useMemo(() => {
+    if (!manual && (url === undefined || url === "")) {
+      setRequestError(MissingUrlParamError());
+    }
+  }, [manual, url]);
 
   const [
     { data, error: axiosError, loading, response },
     runAxiosRequest,
     cancelRequest,
-  ] = (useAxiosInstance ?? useAxios)<T>(
+  ] = (useAxiosInstance ?? useAxios)<ResponseDataType, PayloadBodyType>(
     {
       headers,
       timeout,
+      ...(url !== undefined && url !== "" ? { url } : {}),
       ...axiosConfigAndOptions,
     },
-    { manual: true, useCache, ...axiosConfigAndOptions }
+    { manual, useCache, ...axiosConfigAndOptions }
   );
 
   const runRequest = useCallback(
-    ({
+    <
+      RequestResponseDataType extends ResponseDataType = ResponseDataType,
+      RequestPayloadBodyType extends PayloadBodyType = PayloadBodyType
+    >({
       headers: headersForRequest = headers,
       responseSchema: responseSchemaForRequest = responseSchema,
+      throwOnCanceled: throwOnCanceledForRequest = throwOnCanceled,
       throwOnError: throwOnErrorForRequest = throwOnError,
       timeout: timeoutForRequest = timeout,
+      url: urlForRequest = url,
       useCache: useCacheForRequest = useCache,
       ...axiosRequestConfig
-    }: AxiosRequestConfig<T> &
-      RefetchOptions & {
-        responseSchema?: joi.Schema;
-        throwOnError?: boolean;
-      } = {}) =>
-      runAxiosRequest(
-        { headers, timeout, ...axiosRequestConfig },
+    }: ManualRequestParams<
+      RequestResponseDataType,
+      RequestPayloadBodyType
+    > = {}) => {
+      if (!(urlForRequest !== undefined && urlForRequest !== "")) {
+        const error = MissingUrlParamError();
+
+        setRequestError(error);
+
+        return Promise.reject(error);
+      }
+
+      return runAxiosRequest(
+        {
+          headers: headersForRequest,
+          timeout: timeoutForRequest,
+          url: urlForRequest,
+          ...axiosRequestConfig,
+        },
         {
           useCache: useCacheForRequest,
         }
@@ -79,17 +120,23 @@ export const useRequest = <T>({
             setRequestError(reqError);
           }
 
-          if (throwOnErrorForRequest) {
+          if (
+            (reqError instanceof CanceledError && throwOnCanceledForRequest) ||
+            (!(reqError instanceof CanceledError) && throwOnErrorForRequest)
+          ) {
             throw reqError;
           }
-        }),
+        }) as Promise<RequestResponseDataType | undefined>;
+    },
     [
       headers,
       responseSchema,
       runAxiosRequest,
       setRequestError,
+      throwOnCanceled,
       throwOnError,
       timeout,
+      url,
       useCache,
     ]
   );
@@ -99,9 +146,10 @@ export const useRequest = <T>({
   });
 
   const error = (axiosError ?? requestError) as
-    | AxiosError<T, T>
-    | CanceledError<T>
-    | ValidationError;
+    | AxiosError<ResponseDataType, PayloadBodyType>
+    | CanceledError<ResponseDataType>
+    | ValidationError
+    | Error;
 
   return {
     cancelRequest,

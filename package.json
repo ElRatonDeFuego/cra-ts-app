@@ -7,7 +7,6 @@
     "axios-hooks": "^3.1.4",
     "graphql": "^16.6.0",
     "joi": "^17.6.0",
-    "msw": "^0.45.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -19,6 +18,7 @@
     "@types/node": "^16.11.47",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/react-test-renderer": "^18.0.0",
     "eslint-plugin-escape": "^1.0.0",
     "eslint-plugin-no-null": "^1.0.2",
     "eslint-plugin-prefer-arrow": "^1.2.3",
@@ -26,8 +26,10 @@
     "eslint-plugin-sonarjs": "^0.15.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
+    "msw": "^0.46.0",
     "prettier": "^2.7.1",
     "react-scripts": "5.0.1",
+    "react-test-renderer": "^18.2.0",
     "sass": "^1.54.4",
     "serve": "^14.0.1",
     "source-map-explorer": "^2.5.2",
@@ -47,6 +49,7 @@
     "test:coverage:watch": "npm t -- --coverage --watchAll=true .",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "test:only-changed": "npm t -- --onlyChanged",
+    "test:update-snapshots": "npm t -- -u",
     "test:watch": "npm t -- --watchAll=true"
   },
   "browserslist": {

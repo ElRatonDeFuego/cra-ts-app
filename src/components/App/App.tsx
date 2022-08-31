@@ -6,7 +6,9 @@ export const App = () => (
     <header className="bg-gray-900 min-h-screen flex flex-col items-center justify-center text-white text-3xl">
       <img
         src={logo}
-        className={`h-96 pointer-events-none ${styles["app-logo"]}`}
+        className={`h-96 pointer-events-none ${
+          styles["app-logo"] ?? /* istanbul ignore next */ ""
+        }`}
         alt="logo"
       />
       <p>

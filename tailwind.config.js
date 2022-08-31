@@ -5,4 +5,8 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  variants: {
+    backgroundColor: ["hover", "focus", "responsive", "active"],
+    fontSize: ["responsive", "hover"],
+  },
 };

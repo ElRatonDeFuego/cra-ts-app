@@ -5,7 +5,7 @@ import {
   renderHook,
   waitFor,
 } from "@testing-library/react";
-import { useEffectOnKeyPressed } from "./useEffectOnKeyPressed";
+import { useEffectOnKeyPressed } from "../useEffectOnKeyPressed";
 
 it("should call the effect callback when the 'Escape' key is pressed", async () => {
   const effect = jest.fn();

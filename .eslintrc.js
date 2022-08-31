@@ -1,12 +1,19 @@
 module.exports = {
   extends: [
     "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:import/typescript",
+    "plugin:jest/recommended",
     "plugin:promise/recommended",
     "plugin:sonarjs/recommended",
     "react-app",
     "react-app/jest",
   ],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: ["./tsconfig.json"],
+  },
   plugins: ["escape", "no-null", "prefer-arrow", "react-hooks", "sonarjs"],
   rules: {
     "@typescript-eslint/no-redeclare": "error",
@@ -17,8 +24,10 @@ module.exports = {
         ignoreRestSiblings: true,
       },
     ],
+    "@typescript-eslint/prefer-nullish-coalescing": "error",
     "accessor-pairs": "error",
     "array-callback-return": "error",
+    "arrow-body-style": "error",
     "class-methods-use-this": "error",
     complexity: "error",
     "consistent-return": "error",
@@ -56,6 +65,7 @@ module.exports = {
         warnOnUnassignedImports: true,
       },
     ],
+    "jest/expect-expect": "error",
     "jsx-a11y/alt-text": "error",
     "jsx-a11y/anchor-has-content": "error",
     "jsx-a11y/anchor-is-valid": "error",
