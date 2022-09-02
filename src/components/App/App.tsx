@@ -1,3 +1,5 @@
+import { faBarsStaggered } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./App.module.css";
 import logo from "./logo.svg";
 
@@ -12,6 +14,7 @@ export const App = () => (
         alt="logo"
       />
       <p>
+        <FontAwesomeIcon className="mr-6" icon={faBarsStaggered} />
         Edit <code>src/App.tsx</code> and save to reload.
       </p>
       <a
