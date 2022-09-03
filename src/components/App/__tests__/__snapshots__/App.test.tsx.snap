@@ -5,11 +5,11 @@ exports[`should match the snapshot 1`] = `
   className="text-center"
 >
   <header
-    className="bg-gray-900 min-h-screen flex flex-col items-center justify-center text-white text-3xl"
+    className="min-h-screen flex flex-col items-center justify-center text-white app-header"
   >
     <img
       alt="logo"
-      className="h-96 pointer-events-none app-logo"
+      className="h-96 pointer-events-none animate-spin-slow"
       src="logo.svg"
     />
     <p>
@@ -37,7 +37,7 @@ exports[`should match the snapshot 1`] = `
        and save to reload.
     </p>
     <a
-      className="text-blue-400"
+      className="app-link"
       href="https://reactjs.org"
       rel="noopener noreferrer"
       target="_blank"
