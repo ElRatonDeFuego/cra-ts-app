@@ -1,10 +1,11 @@
-import { AxiosError, CanceledError } from "axios";
+import { CanceledError } from "axios";
 import useAxios from "axios-hooks";
-import { useEffectOnMountOrUnmount } from "hooks/useEffectOnMountOrUnmount";
 import { ValidationError } from "joi";
 import { useCallback, useMemo, useState } from "react";
+import { useEffectOnMountOrUnmount } from "hooks/useEffectOnMountOrUnmount";
 
 import type { ManualRequestParams, UseRequestParams } from "./useRequestTypes";
+import type { AxiosError } from "axios";
 
 export type { ManualRequestParams, UseRequestParams };
 

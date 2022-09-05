@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import renderer from "react-test-renderer";
+import { create } from "react-test-renderer";
 import { ErrorBoundary } from "../ErrorBoundary";
 
 const ComponentThatWillThrow = () => {
@@ -11,25 +11,21 @@ const ComponentThatWillThrow = () => {
 };
 
 test("should match the snapshot without a fallback", () => {
-  const tree = renderer
-    .create(
-      <ErrorBoundary>
-        <ComponentThatWillThrow />
-      </ErrorBoundary>
-    )
-    .toJSON();
+  const tree = create(
+    <ErrorBoundary>
+      <ComponentThatWillThrow />
+    </ErrorBoundary>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 test("should match the snapshot with a fallback", () => {
-  const tree = renderer
-    .create(
-      <ErrorBoundary fallback={<>the fallback component</>}>
-        <ComponentThatWillThrow />
-      </ErrorBoundary>
-    )
-    .toJSON();
+  const tree = create(
+    <ErrorBoundary fallback={<>the fallback component</>}>
+      <ComponentThatWillThrow />
+    </ErrorBoundary>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

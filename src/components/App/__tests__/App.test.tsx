@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import renderer from "react-test-renderer";
+import { create } from "react-test-renderer";
 import { App } from "../App";
 
 test("renders learn react link", () => {
@@ -9,7 +9,7 @@ test("renders learn react link", () => {
 });
 
 test("should match the snapshot", () => {
-  const tree = renderer.create(<App />).toJSON();
+  const tree = create(<App />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

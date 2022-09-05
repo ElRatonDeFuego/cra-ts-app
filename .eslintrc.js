@@ -1,30 +1,62 @@
 module.exports = {
   extends: [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:jest/recommended",
+    "plugin:jsx-a11y/strict",
     "plugin:promise/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "plugin:sonarjs/recommended",
+    "prettier",
     "react-app",
     "react-app/jest",
   ],
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    project: ["./tsconfig.json"],
-  },
-  plugins: ["escape", "no-null", "prefer-arrow", "react-hooks", "sonarjs"],
-  rules: {
-    "@typescript-eslint/no-redeclare": "error",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        args: "none",
-        ignoreRestSiblings: true,
+  overrides: [
+    {
+      extends: [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+      ],
+
+      files: ["*.ts", "*.tsx"],
+
+      parserOptions: {
+        project: ["./tsconfig.json"],
       },
-    ],
-    "@typescript-eslint/prefer-nullish-coalescing": "error",
+
+      rules: {
+        "@typescript-eslint/consistent-type-imports": "error",
+        "@typescript-eslint/no-redeclare": "error",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            args: "none",
+            ignoreRestSiblings: true,
+          },
+        ],
+        "@typescript-eslint/prefer-nullish-coalescing": "error",
+      },
+    },
+  ],
+  parser: "@typescript-eslint/parser",
+  plugins: [
+    "deprecation",
+    "escape",
+    "import",
+    "jest",
+    "jsx-a11y",
+    "no-null",
+    "prefer-arrow",
+    "promise",
+    "react",
+    "react-hooks",
+    "sonarjs",
+    "testing-library",
+    "@typescript-eslint",
+  ],
+  rules: {
     "accessor-pairs": "error",
     "array-callback-return": "error",
     "arrow-body-style": "error",
@@ -168,6 +200,7 @@ module.exports = {
     "quote-props": ["error", "as-needed"],
     quotes: ["error", "double", { avoidEscape: true }],
     radix: "error",
+    "react/react-in-jsx-scope": "off",
     "require-atomic-updates": "error",
     "require-unicode-regexp": "error",
     "sonarjs/no-identical-conditions": "off", // see "no-dupe-else-if"
@@ -184,5 +217,10 @@ module.exports = {
     "symbol-description": "error",
     "unicode-bom": "error",
     yoda: ["error", "never"],
+  },
+  settings: {
+    "import/resolver": {
+      typescript: {},
+    },
   },
 };
