@@ -91,6 +91,7 @@ export const useFlickrSearch = () => {
   return {
     cancelRequest, // used for tests
     displayedResponse,
+    loading,
     photo,
     runRequest,
     search,

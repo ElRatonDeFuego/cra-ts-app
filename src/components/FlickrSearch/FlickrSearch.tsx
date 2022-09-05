@@ -1,9 +1,11 @@
+import { faSearch, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./FlickrSearch.module.scss";
 import { Sidebar } from "./Sidebar";
 import { useFlickrSearch } from "./useFlickrSearch";
 
 export const FlickrSearch = () => {
-  const { displayedResponse, photo, runRequest, search, setSearch } =
+  const { displayedResponse, loading, photo, runRequest, search, setSearch } =
     useFlickrSearch();
 
   return (
@@ -16,14 +18,23 @@ export const FlickrSearch = () => {
             }`}
       >
         <p className="font-light leading-none">Look for Flickr photos</p>
-        <input
-          className="text-gray-900 p-2 m-5 rounded-lg outline-none"
-          data-testid="search-input"
-          name="search"
-          onChange={(event) => setSearch(event.target.value)}
-          type="text"
-          value={search}
-        />
+        <div className="bg-white text-gray-900 p-2 m-5 rounded-lg">
+          <label htmlFor="search">
+            <FontAwesomeIcon
+              className={`ml-5 mr-5 text-xl ${loading ? "animate-spin" : ""}`}
+              icon={loading ? faSpinner : faSearch}
+            />
+          </label>
+          <input
+            className="outline-none"
+            data-testid="search-input"
+            id="search"
+            name="search"
+            onChange={(event) => setSearch(event.target.value)}
+            type="text"
+            value={search}
+          />
+        </div>
         <p data-testid="displayed-response">{displayedResponse}</p>
         {photo.URL && (
           <>

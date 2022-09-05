@@ -19,6 +19,7 @@ import type { FlickrPhoto } from "../../../domain/Flickr";
 const InitialResponse = {
   cancelRequest: expect.any(Function),
   displayedResponse: "Please type in a search term above",
+  loading: false,
   photo: {},
   runRequest: expect.any(Function),
   search: "",
@@ -247,6 +248,7 @@ it('should return a "Loading.." message for long requests', async () => {
     expect(returnValuesRef.current).toEqual({
       ...ResponseAfterSearch,
       displayedResponse: "Loading..",
+      loading: true,
     });
   });
 
