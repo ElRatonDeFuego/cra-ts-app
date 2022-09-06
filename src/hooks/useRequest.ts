@@ -150,7 +150,8 @@ export const useRequest = <
     | AxiosError<ResponseDataType, PayloadBodyType>
     | CanceledError<ResponseDataType>
     | ValidationError
-    | Error;
+    | Error
+    | undefined;
 
   return {
     cancelRequest,
