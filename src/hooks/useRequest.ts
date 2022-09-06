@@ -60,7 +60,11 @@ export const useRequest = <
     { data, error: axiosError, loading, response },
     runAxiosRequest,
     cancelRequest,
-  ] = (useAxiosInstance ?? useAxios)<ResponseDataType, PayloadBodyType>(
+  ] = (useAxiosInstance ?? useAxios)<
+    ResponseDataType,
+    PayloadBodyType,
+    ResponseDataType
+  >(
     {
       headers,
       timeout,
