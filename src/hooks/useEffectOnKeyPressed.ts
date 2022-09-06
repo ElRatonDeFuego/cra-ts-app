@@ -6,10 +6,10 @@ type Props = {
 } & (
   | {
       key: KeyboardEvent["key"];
-      keys?: undefined;
+      keys?: never;
     }
   | {
-      key?: undefined;
+      key?: never;
       keys: Array<KeyboardEvent["key"]>;
     }
 );
