@@ -27,6 +27,10 @@ module.exports = {
       },
 
       rules: {
+        "@typescript-eslint/array-type": [
+          "error",
+          { default: "generic", readonly: "generic" },
+        ],
         "@typescript-eslint/consistent-type-imports": "error",
         "@typescript-eslint/no-redeclare": "error",
         "@typescript-eslint/no-unused-vars": [
