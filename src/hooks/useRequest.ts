@@ -34,16 +34,7 @@ export const useRequest = <
     useAxiosInstance,
     useCache = false,
     ...axiosConfigAndOptions
-  }: UseRequestParams<ResponseDataType, PayloadBodyType> = {
-    abortOnUnmount: true,
-    headers: DefaultHeaders,
-    manual: true,
-    throwOnCanceled: false,
-    throwOnError: false,
-    timeout: DefaultTimeout,
-    url: "",
-    useCache: false,
-  }
+  }: UseRequestParams<ResponseDataType, PayloadBodyType> = {}
   // eslint-disable-next-line sonarjs/cognitive-complexity
 ) => {
   const [requestError, setRequestError] = useState<
